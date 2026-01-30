@@ -1,2 +1,2 @@
-# Arabic-Sentence-Maker
-Arabic Sentence Maker
+# Arabic-Sentence-Builder
+Arabic Sentence Builder
