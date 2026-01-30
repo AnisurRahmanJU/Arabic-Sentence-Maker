@@ -45,7 +45,7 @@ body {
 /* BIG AMIRI FONT FOR GITHUB */
 .ar-display {
     font-family: 'Amiri', serif !important;
-    font-size: 5rem !important; /* Force extra large size */
+    font-size: 100px; /* Force extra large size */
     font-weight: 700;
     color: #212529;
     margin-bottom: 20px;
@@ -61,7 +61,7 @@ body {
 }
 
 .en-display {
-    font-size: 2rem;
+    font-size: 100px;
     color: #0d6efd;
     font-weight: 300;
     font-style: italic;
