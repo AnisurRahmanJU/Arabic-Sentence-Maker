@@ -1,12 +1,14 @@
-/* Ensure fonts load from Google CDN */
 body {
     background-color: #f0f2f5;
     font-family: 'Noto Sans', sans-serif;
-    color: #333;
 }
 
-.main-card {
-    border-radius: 12px;
+.control-panel {
+    background: #ffffff;
+    border-radius: 15px;
+    border-top: 5px solid #0d6efd;
+    padding: 25px;
+    margin-bottom: 30px;
 }
 
 .label-en {
@@ -14,69 +16,62 @@ body {
     font-weight: 700;
     color: #6c757d;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    display: block;
 }
 
-/* FLASHCARD STYLING */
+/* FLASHCARD DISPLAY */
 .flashcard-container {
     background: #ffffff;
-    border-radius: 20px;
-    padding: 60px 30px;
+    border-radius: 30px;
+    padding: 80px 40px;
     text-align: center;
     position: relative;
-    overflow: hidden;
-    max-width: 800px;
-    margin: 0 auto;
-    border: 1px solid rgba(0,0,0,0.05);
+    max-width: 900px;
+    margin: 40px auto;
+    border: 1px solid #eef0f2;
 }
 
-.card-header-stripe {
+.card-stripe {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 10px;
-    background: linear-gradient(90deg, #0d6efd, #0dcaf0);
+    height: 12px;
+    background: linear-gradient(90deg, #0d6efd, #20c997);
+    border-radius: 30px 30px 0 0;
 }
 
+/* BIG AMIRI FONT FOR GITHUB */
 .ar-display {
-    font-family: 'Amiri', serif;
-    font-size: 4.5rem;
-    color: #2c3e50;
+    font-family: 'Amiri', serif !important;
+    font-size: 5rem !important; /* Force extra large size */
+    font-weight: 700;
+    color: #212529;
     margin-bottom: 20px;
     direction: rtl;
-    line-height: 1.4;
+    line-height: 1.5 !important;
 }
 
-.en-divider {
+.divider {
     height: 2px;
-    width: 80px;
-    background: #e0e0e0;
-    margin: 20px auto;
+    width: 150px;
+    background: #dee2e6;
+    margin: 40px auto;
 }
 
 .en-display {
-    font-size: 1.75rem;
+    font-size: 2rem;
     color: #0d6efd;
     font-weight: 300;
     font-style: italic;
 }
 
-/* FORM STYLING */
-.form-select {
-    border: 2px solid #e9ecef;
-    border-radius: 8px;
-    transition: all 0.2s ease;
+.dev-credit {
+    font-size: 0.85rem;
 }
 
-.form-select:focus {
-    border-color: #0d6efd;
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.1);
-}
-
-/* RESPONSIVE */
 @media (max-width: 768px) {
-    .ar-display { font-size: 3rem; }
-    .en-display { font-size: 1.4rem; }
+    .ar-display { font-size: 3rem !important; }
+    .en-display { font-size: 1.5rem; }
 }
