@@ -3,25 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arabic Sentence Builder</title>
+    <title>Arabic Sentence Builder | Md. Anisur Rahman</title>
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<header class="bg-dark text-white py-3 mb-4 shadow-sm">
+<header class="bg-dark text-white py-4 mb-4 shadow-sm">
     <div class="container d-flex justify-content-between align-items-center">
         <div>
-            <h3 class="m-0">Arabic Sentence Builder</h3>
-            <small class="text-info">Developer: Md. Anisur Rahman</small>
+            <h2 class="m-0 fw-bold">Arabic Sentence Builder</h2>
+            <div class="dev-credit">Developer: <span class="text-info">Md. Anisur Rahman</span></div>
         </div>
-        
+        <div class="text-end">
+            <span class="badge bg-primary px-3 py-2">Advanced Engine v2026</span>
+        </div>
     </div>
 </header>
 
 <div class="container">
-    <div class="main-card shadow-sm p-4 mb-4 bg-white border">
+    <div class="control-panel shadow-sm">
         <div class="row g-3">
             <div class="col-md-3">
                 <label class="label-en">Tense / الزمن</label>
@@ -42,23 +49,18 @@
             <div class="col-md-3">
                 <label class="label-en">Subject / الفاعل</label>
                 <select id="subject" class="form-select" onchange="updateUI()">
-                    <optgroup label="People">
-                        <option value="boy">The Boy (الْوَلَدُ)</option>
-                        <option value="girl">The Girl (الْبِنْتُ)</option>
-                        <option value="teacher">The Teacher (الْمُعَلِّمُ)</option>
-                    </optgroup>
-                    <optgroup label="Pronouns">
-                        <option value="i">I (أَنَا)</option>
-                        <option value="we">We (نَحْنُ)</option>
-                        <option value="youM">You m. (أَنْتَ)</option>
-                    </optgroup>
+                    <option value="boy">The Boy (الْوَلَدُ)</option>
+                    <option value="girl">The Girl (الْبِنْتُ)</option>
+                    <option value="i">I (أَنَا)</option>
+                    <option value="we">We (نَحْنُ)</option>
+                    <option value="youM">You m. (أَنْتَ)</option>
                 </select>
             </div>
             <div class="col-md-3">
                 <label class="label-en">Action / الفعل</label>
-                <select id="verb" class="form-select" onchange="filterObjects(); updateUI()"></select>
+                <select id="verb" class="form-select" onchange="updateUI()"></select>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 mt-3">
                 <label class="label-en">Object / المفعول به</label>
                 <select id="object" class="form-select" onchange="updateUI()"></select>
             </div>
@@ -66,36 +68,17 @@
     </div>
 
     <div class="flashcard-container shadow-lg">
-        <div class="card-header-stripe"></div>
-        <div class="ar-display" id="ar-out">...</div>
-        <div class="en-divider"></div>
-        <div class="en-display" id="en-out">...</div>
-        
-        <div class="mt-4">
-            <button class="btn btn-outline-secondary btn-sm" onclick="copyToClipboard()">
-                Copy Sentence / نسخ الجملة
-            </button>
-        </div>
+        <div class="card-stripe"></div>
+        <div id="ar-out" class="ar-display">جاري التحميل...</div>
+        <div class="divider"></div>
+        <div id="en-out" class="en-display">Loading...</div>
     </div>
 </div>
 
-<footer class="text-center py-5 mt-4">
-    <p class="mb-0 text-muted">© 2026 Arabic Sentence Builder</p>
-    <p class="small text-secondary">Created by <strong>Md. Anisur Rahman</strong></p>
+<footer class="text-center mt-5 text-muted">
+    <p>© 2026 Md. Anisur Rahman | Arabic Grammar Engine</p>
 </footer>
 
 <script src="script.js"></script>
-
-<script>
-    // Quick helper for copying text
-    function copyToClipboard() {
-        const ar = document.getElementById('ar-out').innerText;
-        const en = document.getElementById('en-out').innerText;
-        const text = `${ar} - ${en}`;
-        navigator.clipboard.writeText(text);
-        alert("Copied to clipboard!");
-    }
-</script>
-
 </body>
 </html>
