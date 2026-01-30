@@ -5,19 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arabic Sentence Builder</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<header class="bg-dark text-white py-3 mb-4 shadow">
+<header class="bg-dark text-white py-3 mb-4 shadow-sm">
     <div class="container d-flex justify-content-between align-items-center">
-        <h3 class="m-0">Arabic Sentence Builder</h3>
-        <nav><span class="badge bg-primary">Grammar Engine: Advanced</span></nav>
+        <div>
+            <h3 class="m-0">Arabic Sentence Builder</h3>
+            <small class="text-info">Developer: Md. Anisur Rahman</small>
+        </div>
+        
     </div>
 </header>
 
 <div class="container">
-    <div class="main-card shadow-lg p-4 mb-5 bg-white">
+    <div class="main-card shadow-sm p-4 mb-4 bg-white border">
         <div class="row g-3">
             <div class="col-md-3">
                 <label class="label-en">Tense / الزمن</label>
@@ -27,7 +31,6 @@
                     <option value="order">Order (الأمر)</option>
                 </select>
             </div>
-
             <div class="col-md-3">
                 <label class="label-en">Mode / النوع</label>
                 <select id="mode" class="form-select" onchange="updateUI()">
@@ -36,7 +39,6 @@
                     <option value="interrogative">Interrogative (?)</option>
                 </select>
             </div>
-
             <div class="col-md-3">
                 <label class="label-en">Subject / الفاعل</label>
                 <select id="subject" class="form-select" onchange="updateUI()">
@@ -52,30 +54,48 @@
                     </optgroup>
                 </select>
             </div>
-
             <div class="col-md-3">
                 <label class="label-en">Action / الفعل</label>
                 <select id="verb" class="form-select" onchange="filterObjects(); updateUI()"></select>
             </div>
-
             <div class="col-md-12">
                 <label class="label-en">Object / المفعول به</label>
                 <select id="object" class="form-select" onchange="updateUI()"></select>
             </div>
         </div>
+    </div>
 
-        <div class="output-container mt-5">
-            <div class="ar-display" id="ar-out">...</div>
-            <div class="en-display" id="en-out">...</div>
+    <div class="flashcard-container shadow-lg">
+        <div class="card-header-stripe"></div>
+        <div class="ar-display" id="ar-out">...</div>
+        <div class="en-divider"></div>
+        <div class="en-display" id="en-out">...</div>
+        
+        <div class="mt-4">
+            <button class="btn btn-outline-secondary btn-sm" onclick="copyToClipboard()">
+                Copy Sentence / نسخ الجملة
+            </button>
         </div>
     </div>
 </div>
 
-<footer class="bg-light text-center py-4 border-top">
-    <p class="mb-1">Arabic Sentence Builder &copy; 2026</p>
-    <small class="text-muted">Semantic Logic: Prevents "Eating a book"</small>
+<footer class="text-center py-5 mt-4">
+    <p class="mb-0 text-muted">© 2026 Arabic Sentence Builder</p>
+    <p class="small text-secondary">Created by <strong>Md. Anisur Rahman</strong></p>
 </footer>
 
 <script src="script.js"></script>
+
+<script>
+    // Quick helper for copying text
+    function copyToClipboard() {
+        const ar = document.getElementById('ar-out').innerText;
+        const en = document.getElementById('en-out').innerText;
+        const text = `${ar} - ${en}`;
+        navigator.clipboard.writeText(text);
+        alert("Copied to clipboard!");
+    }
+</script>
+
 </body>
 </html>
