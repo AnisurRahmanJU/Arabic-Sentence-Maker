@@ -1,85 +1,94 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="styles.css?v=2026">
-
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Arabic Sentence Builder | Md. Anisur Rahman</title>
-    
+
+    <!-- Bootstrap RTL -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
-    
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    
-   
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css?v=2026">
 </head>
+
 <body>
 
-<header class="bg-dark text-white py-4 mb-4 shadow-sm">
+<header class="main-header">
     <div class="container d-flex justify-content-between align-items-center">
         <div>
-            <h2 class="m-0 fw-bold">Arabic Sentence Builder</h2>
-            <div class="dev-credit">Developer: <span class="text-info">Md. Anisur Rahman</span></div>
+            <h1>Arabic Sentence Builder</h1>
+            <div class="dev">Developer: <span>Md. Anisur Rahman</span></div>
         </div>
-        <div class="text-end">
-            <span class="badge bg-primary px-3 py-2">Advanced Engine v2026</span>
-        </div>
+        <span class="engine-badge">Advanced Engine v2026</span>
     </div>
 </header>
 
-<div class="container">
-    <div class="control-panel shadow-sm">
+<main class="container">
+
+    <!-- CONTROL PANEL -->
+    <section class="control-panel">
         <div class="row g-3">
+
             <div class="col-md-3">
-                <label class="label-en">Tense / الزمن</label>
+                <label>Tense / الزمن</label>
                 <select id="tense" class="form-select" onchange="updateUI()">
                     <option value="past">Past (الماضي)</option>
                     <option value="present">Present (المضارع)</option>
                     <option value="order">Order (الأمر)</option>
                 </select>
             </div>
+
             <div class="col-md-3">
-                <label class="label-en">Mode / النوع</label>
+                <label>Mode / النوع</label>
                 <select id="mode" class="form-select" onchange="updateUI()">
                     <option value="affirmative">Affirmative (+)</option>
                     <option value="negative">Negative (-)</option>
                     <option value="interrogative">Interrogative (?)</option>
                 </select>
             </div>
+
             <div class="col-md-3">
-                <label class="label-en">Subject / الفاعل</label>
+                <label>Subject / الفاعل</label>
                 <select id="subject" class="form-select" onchange="updateUI()">
                     <option value="boy">The Boy (الْوَلَدُ)</option>
                     <option value="girl">The Girl (الْبِنْتُ)</option>
                     <option value="i">I (أَنَا)</option>
                     <option value="we">We (نَحْنُ)</option>
-                    <option value="youM">You m. (أَنْتَ)</option>
+                    <option value="youM">You (أَنْتَ)</option>
                 </select>
             </div>
+
             <div class="col-md-3">
-                <label class="label-en">Action / الفعل</label>
+                <label>Action / الفعل</label>
                 <select id="verb" class="form-select" onchange="updateUI()"></select>
             </div>
-            <div class="col-md-12 mt-3">
-                <label class="label-en">Object / المفعول به</label>
+
+            <div class="col-12">
+                <label>Object / المفعول به</label>
                 <select id="object" class="form-select" onchange="updateUI()"></select>
             </div>
+
         </div>
-    </div>
+    </section>
 
-    <div class="flashcard-container shadow-lg">
-        <div class="card-stripe"></div>
-        <center><div id="ar-out" class="ar-display">جاري التحميل...</div>
+    <!-- OUTPUT CARD -->
+    <section class="sentence-card">
+        <div class="stripe"></div>
+        <div id="ar-out" class="arabic-text">...</div>
         <div class="divider"></div>
-        <div id="en-out" class="en-display">Loading...</div></center>
-    </div>
-</div>
+        <div id="en-out" class="english-text">...</div>
+    </section>
 
-<footer class="text-center mt-5 text-muted">
-    <p>© 2026 Md. Anisur Rahman | Arabic Grammar Engine</p>
+</main>
+
+<footer>
+    © 2026 Md. Anisur Rahman | Arabic Grammar Engine
 </footer>
 
 <script src="script.js"></script>
