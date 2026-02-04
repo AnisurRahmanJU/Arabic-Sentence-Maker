@@ -1,84 +1,123 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arabic Sentence Builder</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Arabic Sentence Builder</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css">
-
-    <style>
-        /* Optional: quick container padding */
-        .container {
-            padding-top: 50px;
-            padding-bottom: 50px;
-        }
-    </style>
+  <!-- CSS -->
+  <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
 
-<div class="container">
-    <div class="card p-4 shadow-sm">
-        <h1 class="text-center mb-4">Arabic Sentence Builder</h1>
-        <hr>
+  <div class="container py-5">
 
-        <!-- Dropdowns -->
-        <div class="row g-3 mb-4">
-            <div class="col-md-4">
-                <label for="subject" class="form-label">Subject</label>
-                <select id="subject" class="form-select"></select>
-            </div>
-            <div class="col-md-4">
-                <label for="verb" class="form-label">Verb</label>
-                <select id="verb" class="form-select"></select>
-            </div>
-            <div class="col-md-4">
-                <label for="object" class="form-label">Object</label>
-                <select id="object" class="form-select"></select>
-            </div>
-        </div>
-
-        <!-- Tense & Mode -->
-        <div class="row g-3 mb-4">
-            <div class="col-md-6">
-                <label for="tense" class="form-label">Tense</label>
-                <select id="tense" class="form-select">
-                    <option value="past">Past</option>
-                    <option value="present">Present</option>
-                    <option value="order">Imperative (Order)</option>
-                </select>
-            </div>
-            <div class="col-md-6">
-                <label for="mode" class="form-label">Mode</label>
-                <select id="mode" class="form-select">
-                    <option value="affirmative">Affirmative</option>
-                    <option value="negative">Negative</option>
-                    <option value="interrogative">Interrogative</option>
-                </select>
-            </div>
-        </div>
-
-        <!-- Sentence Output -->
-        <div class="sentence-card p-4 bg-light text-center mb-4 shadow-sm">
-            <div id="ar-out" class="arabic-output mb-3">اَلجُمْلَةُ سَهْلَةٌ</div>
-            <div id="en-out" class="english-output">The sentence will appear here</div>
-        </div>
-
-        <div class="text-center">
-            <small class="text-muted">Developer: Md. Anisur Rahman | Version 2026</small>
-        </div>
+    <!-- HEADER -->
+    <div class="text-center mb-4">
+      <h1 class="fw-bold display-6 mb-1">Arabic Sentence Builder</h1>
+      <p class="text-muted mb-0">Nominal (مبتدأ + خبر) and Verbal (فعلية) Sentence Generator</p>
     </div>
-</div>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- OUTPUT CARD -->
+    <div class="card sentence-card shadow-lg p-4 mb-4">
+      <div id="ar-out" class="arabic-output">—</div>
+      <hr class="my-3" />
+      <div id="en-out" class="english-output text-center">—</div>
+    </div>
 
-<!-- Custom JS -->
-<script src="script.js"></script>
+    <!-- CONTROL PANEL -->
+    <div class="card shadow-sm p-4">
+      <div class="row g-3">
 
+        <!-- Sentence Type -->
+        <div class="col-md-4">
+          <label class="form-label fw-bold small">Sentence Type</label>
+          <select id="sentenceType" class="form-select">
+            <option value="nominal">Nominal Sentence (الجملة الاسمية)</option>
+            <option value="verbal">Verbal Sentence (الجملة الفعلية)</option>
+          </select>
+        </div>
+
+        <!-- SUBJECT -->
+        <div class="col-md-4">
+          <label class="form-label fw-bold small">Subject</label>
+          <select id="subject" class="form-select"></select>
+        </div>
+
+        <!-- NOMINAL: BE VERB -->
+        <div class="col-md-4 nominal-only">
+          <label class="form-label fw-bold small">Be Verb</label>
+          <select id="beVerb" class="form-select">
+            <option value="is">is / am / are (—)</option>
+          </select>
+        </div>
+
+        <!-- NOMINAL: PREDICATE -->
+        <div class="col-md-6 nominal-only">
+          <label class="form-label fw-bold small">Predicate (خبر)</label>
+          <select id="predicate" class="form-select"></select>
+        </div>
+
+        <!-- VERBAL: VERB -->
+        <div class="col-md-6 verbal-only">
+          <label class="form-label fw-bold small">Verb</label>
+          <select id="verb" class="form-select"></select>
+        </div>
+
+        <!-- VERBAL: PREPOSITION -->
+        <div class="col-md-4 verbal-only">
+          <label class="form-label fw-bold small">Preposition (حرف جر)</label>
+          <select id="prep" class="form-select">
+            <option value="">(none)</option>
+            <option value="ila">to (إِلَى)</option>
+            <option value="fi">in (فِي)</option>
+            <option value="ala">on (عَلَى)</option>
+            <option value="min">from (مِنْ)</option>
+          </select>
+        </div>
+
+        <!-- VERBAL: OBJECT -->
+        <div class="col-md-4 verbal-only">
+          <label class="form-label fw-bold small">Object</label>
+          <select id="object" class="form-select"></select>
+        </div>
+
+        <!-- VERBAL: TENSE -->
+        <div class="col-md-2 verbal-only">
+          <label class="form-label fw-bold small">Tense</label>
+          <select id="tense" class="form-select">
+            <option value="past">Past</option>
+            <option value="present">Present</option>
+            <option value="order">Order</option>
+          </select>
+        </div>
+
+        <!-- VERBAL: MODE -->
+        <div class="col-md-2 verbal-only">
+          <label class="form-label fw-bold small">Mode</label>
+          <select id="mode" class="form-select">
+            <option value="affirmative">Affirmative</option>
+            <option value="negative">Negative</option>
+            <option value="interrogative">Question</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="text-center mt-4">
+        <button class="btn btn-primary px-4 py-2 fw-semibold" id="btnGenerate">
+          Generate Sentence
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
