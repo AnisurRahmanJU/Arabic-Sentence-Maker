@@ -1,80 +1,213 @@
-/* =====================================
-   Arabic Sentence Builder – Bootstrap UI 
+/* ================================
+   Arabic Sentence Builder - CSS
    Developer: Md. Anisur Rahman
-===================================== */
+   Version: 2026 UI
+================================ */
 
-body {
-  background-color: #f4f6f9;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    "Tahoma", "Arial", sans-serif;
-  color: #212529;
+/* Google Font (Optional but nice) */
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Amiri:wght@400;700&display=swap');
+
+:root{
+  --bg: #0b1220;
+  --card: rgba(255,255,255,0.06);
+  --card2: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.12);
+  --text: #eaf1ff;
+  --muted: rgba(234,241,255,0.75);
+  --accent: #4da3ff;
+  --accent2: #22c55e;
+  --danger: #ef4444;
+  --shadow: 0 20px 60px rgba(0,0,0,0.35);
 }
 
-.card {
-  border-radius: 20px;
-  border: none;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.sentence-card {
-  border-radius: 36px;
+body{
+  min-height: 100vh;
+  font-family: "Hind Siliguri", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: radial-gradient(1200px 600px at 20% 10%, rgba(77,163,255,0.25), transparent 60%),
+              radial-gradient(1000px 600px at 90% 30%, rgba(34,197,94,0.18), transparent 55%),
+              linear-gradient(180deg, #070b15, #0b1220);
+  color: var(--text);
+  padding: 22px;
 }
 
-.arabic-output {
-  font-size: clamp(2.8rem, 6vw, 6rem);
-  font-weight: 900;
-  line-height: 1.35;
+/* Page wrapper */
+.container{
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Header */
+.header{
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.header h1{
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+}
+
+.header p{
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+/* Card */
+.card{
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 18px;
+  backdrop-filter: blur(10px);
+}
+
+/* Controls grid */
+.controls{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 12px;
+}
+
+@media (max-width: 900px){
+  .controls{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Label */
+label{
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(234,241,255,0.9);
+}
+
+/* Selects */
+select{
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.06);
+  color: var(--text);
+  outline: none;
+  font-size: 15px;
+  transition: 0.2s ease;
+}
+
+select:focus{
+  border-color: rgba(77,163,255,0.7);
+  box-shadow: 0 0 0 4px rgba(77,163,255,0.15);
+}
+
+/* Toggle sentence type (Nominal / Verbal) */
+.topbar{
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.btn{
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.05);
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+.btn:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,0.08);
+}
+
+.btn.active{
+  border-color: rgba(77,163,255,0.8);
+  background: rgba(77,163,255,0.15);
+}
+
+/* =========================
+   OUTPUT STYLING (UPDATED)
+   Arabic + English output
+   Bold + Center + Large
+========================= */
+
+.output-wrap{
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.output-box{
+  background: var(--card2);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 18px 16px;
+  box-shadow: 0 14px 45px rgba(0,0,0,0.25);
+}
+
+/* Arabic output */
+#ar-out{
+  font-family: "Amiri", serif;
   direction: rtl;
   text-align: center;
-  color: #111827;
-  padding: 6px 10px;
+
+  font-size: 34px;     /* Larger */
+  font-weight: 800;    /* Bold */
+  line-height: 1.8;
+  letter-spacing: 0.2px;
+
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.35);
 }
 
-.english-output {
-  font-size: clamp(1.2rem, 2.2vw, 2.2rem);
-  font-weight: 700;
-  font-style: italic;
-  color: #0d6efd;
+/* English output */
+#en-out{
+  direction: ltr;
+  text-align: center;
+
+  font-size: 26px;    /* Larger */
+  font-weight: 800;   /* Bold */
+  line-height: 1.6;
+
+  margin-top: 6px;
+  color: rgba(234,241,255,0.95);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.25);
 }
 
-hr {
-  height: 2px;
-  background-color: #dee2e6;
-  border: none;
+/* Small helper text (if any) */
+.small-note{
+  text-align: center;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 14px;
 }
 
-label {
-  color: #374151;
+/* Hide blocks (used by JS) */
+.hidden{
+  display: none !important;
 }
 
-.form-select {
-  border-radius: 14px;
-  padding: 12px 14px;
-  font-weight: 600;
-}
-
-.btn-primary {
-  border-radius: 16px;
-  padding: 12px 18px;
-  box-shadow: 0 10px 25px rgba(13, 110, 253, 0.18);
-}
-
-.btn-primary:hover {
-  transform: translateY(-1px);
-  transition: 0.2s;
-}
-
-/* Hide blocks */
-.nominal-only,
-.verbal-only {
-  display: none;
-}
-
-/* Mobile */
-@media (max-width: 576px) {
-  .arabic-output {
-    font-size: clamp(2.2rem, 9vw, 4rem);
-  }
-  .english-output {
-    font-size: 1.15rem;
-  }
+/* Footer */
+.footer{
+  margin-top: 18px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
 }
