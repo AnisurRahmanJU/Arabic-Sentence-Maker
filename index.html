@@ -1,93 +1,84 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arabic Sentence Builder</title>
 
-    <!-- Bootstrap RTL -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css?v=2026">
-</head>
+    <link rel="stylesheet" href="styles.css">
 
+    <style>
+        /* Optional: quick container padding */
+        .container {
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+    </style>
+</head>
 <body>
 
-<!-- HEADER -->
-<header class="bg-dark text-white py-4 shadow">
-    <div class="container d-flex justify-content-between align-items-center">
-        <div>
-            <h2 class="fw-bold mb-1">Arabic Sentence Builder</h2>
-            <small class="text-info">Developer: Md. Anisur Rahman</small>
+<div class="container">
+    <div class="card p-4 shadow-sm">
+        <h1 class="text-center mb-4">Arabic Sentence Builder</h1>
+        <hr>
+
+        <!-- Dropdowns -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-4">
+                <label for="subject" class="form-label">Subject</label>
+                <select id="subject" class="form-select"></select>
+            </div>
+            <div class="col-md-4">
+                <label for="verb" class="form-label">Verb</label>
+                <select id="verb" class="form-select"></select>
+            </div>
+            <div class="col-md-4">
+                <label for="object" class="form-label">Object</label>
+                <select id="object" class="form-select"></select>
+            </div>
         </div>
-        <span class="badge bg-primary px-3 py-2">Simple Arabic Grammar</span>
-    </div>
-</header>
 
-<!-- MAIN -->
-<main class="container my-5">
-
-    <!-- CONTROL PANEL -->
-    <div class="card shadow-sm p-4 mb-5">
-        <div class="row g-3">
-
-            <div class="col-md-3">
-                <label class="form-label fw-bold small">Tense / الزمن</label>
-                <select id="tense" class="form-select" onchange="updateUI()">
-                    <option value="past">Past (الماضي)</option>
-                    <option value="present">Present (المضارع)</option>
-                    <option value="order">Order (الأمر)</option>
+        <!-- Tense & Mode -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-6">
+                <label for="tense" class="form-label">Tense</label>
+                <select id="tense" class="form-select">
+                    <option value="past">Past</option>
+                    <option value="present">Present</option>
+                    <option value="order">Imperative (Order)</option>
                 </select>
             </div>
-
-            <div class="col-md-3">
-                <label class="form-label fw-bold small">Mode / النوع</label>
-                <select id="mode" class="form-select" onchange="updateUI()">
-                    <option value="affirmative">Affirmative (+)</option>
-                    <option value="negative">Negative (-)</option>
-                    <option value="interrogative">Interrogative (?)</option>
+            <div class="col-md-6">
+                <label for="mode" class="form-label">Mode</label>
+                <select id="mode" class="form-select">
+                    <option value="affirmative">Affirmative</option>
+                    <option value="negative">Negative</option>
+                    <option value="interrogative">Interrogative</option>
                 </select>
             </div>
+        </div>
 
-            <div class="col-md-3">
-                <label class="form-label fw-bold small">Subject / الفاعل</label>
-                <select id="subject" class="form-select" onchange="updateUI()">
-                    <option value="boy">The Boy (الْوَلَدُ)</option>
-                    <option value="girl">The Girl (الْبِنْتُ)</option>
-                    <option value="i">I (أَنَا)</option>
-                    <option value="we">We (نَحْنُ)</option>
-                    <option value="youM">You (أَنْتَ)</option>
-                </select>
-            </div>
+        <!-- Sentence Output -->
+        <div class="sentence-card p-4 bg-light text-center mb-4 shadow-sm">
+            <div id="ar-out" class="arabic-output mb-3">اَلجُمْلَةُ سَهْلَةٌ</div>
+            <div id="en-out" class="english-output">The sentence will appear here</div>
+        </div>
 
-            <div class="col-md-3">
-                <label class="form-label fw-bold small">Action / الفعل</label>
-                <select id="verb" class="form-select" onchange="updateUI()"></select>
-            </div>
-
-            <div class="col-12">
-                <label class="form-label fw-bold small">Object / المفعول به</label>
-                <select id="object" class="form-select" onchange="updateUI()"></select>
-            </div>
-
+        <div class="text-center">
+            <small class="text-muted">Developer: Md. Anisur Rahman | Version 2026</small>
         </div>
     </div>
+</div>
 
-    <!-- OUTPUT -->
-    <div class="card shadow-lg text-center p-5 sentence-card">
-        <div id="ar-out" class="arabic-output mb-4">...</div>
-        <hr class="w-25 mx-auto">
-        <div id="en-out" class="english-output mt-4">...</div>
-    </div>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-</main>
-
-<!-- FOOTER -->
-<footer class="text-center text-muted py-4">
-     Md. Anisur Rahman | Arabic Grammar Engine
-</footer>
-
+<!-- Custom JS -->
 <script src="script.js"></script>
+
 </body>
 </html>
