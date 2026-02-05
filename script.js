@@ -2,6 +2,7 @@
    Arabic Sentence Builder – script.js
    Developer: Md. Anisur Rahman
    Optimized Full Version
+   Fixed: Order + Negative + Nominal "You are" English
 ===================================== */
 
 const elements = {
@@ -121,7 +122,6 @@ const verbs = {
         present: { "1s":"أَغْسِلُ", "3sm":"يَغْسِلُ" },
         order: { "2sm":"اِغْسِلْ" }
     }, type: "thing" }
-    // ... Additional verbs follow the same structure
 };
 
 function populate() {
@@ -158,7 +158,12 @@ function build() {
         const arPred = p.ar[s.person] || p.ar["1s"];
         elements.arOut.textContent = `${s.ar} ${arPred}`;
         
-        let be = (s.person === "1s") ? "am" : (s.number === "p" ? "are" : "is");
+        // Fixed "You are" for 2nd person
+        let be = (s.person === "1s") ? "am" 
+                  : (["2sm","2sf","2p","2pf"].includes(s.person)) ? "are"
+                  : (s.number === "p") ? "are" 
+                  : "is";
+
         let nounEn = p.en;
         if (s.number === "p") nounEn = nounEn.replace("a ", "") + "s";
         elements.enOut.textContent = `${s.en} ${be} ${nounEn}.`;
@@ -185,17 +190,26 @@ function build() {
         } else {
             arParts.push(vAr, preps[pKey].ar, (obj.type === "pronoun" ? obj.ar.suffix : obj.ar));
         }
-        elements.arOut.textContent = arParts.join(" ");
+        const arSentence = arParts.join(" ");
+        elements.arOut.textContent = arSentence;
 
+        // English output
         let vEn = (tense === "past") ? v.pastEn : v.en;
         if (tense === "present" && ["3sm", "3sf"].includes(s.person) && mode === "affirmative") {
             vEn += (vEn.endsWith("o") ? "es" : "s");
         }
 
-        let res = "";
         let pEn = pKey ? preps[pKey].en + " " : "";
-        if (tense === "order") res = `${v.en.toUpperCase()} ${pEn}${obj.en}!`;
-        else if (mode === "interrogative") {
+        let res = "";
+
+        // Fix: Order + Negative -> Do not ...
+        if (tense === "order" && (arSentence.includes("لَا") || arSentence.includes("مَا"))) {
+            res = `Do not ${v.en} ${pEn}${obj.en}!`;
+        } else if (tense === "order" && mode === "interrogative") {
+            res = `Do you ${v.en} ${pEn}${obj.en}?`;
+        } else if (tense === "order") {
+            res = `${v.en.toUpperCase()} ${pEn}${obj.en}!`;
+        } else if (mode === "interrogative") {
             let aux = (tense === "past") ? "Did" : (["3sm", "3sf"].includes(s.person) ? "Does" : "Do");
             res = `${aux} ${s.en.toLowerCase()} ${v.en} ${pEn}${obj.en}?`;
         } else if (mode === "negative") {
@@ -204,6 +218,7 @@ function build() {
         } else {
             res = `${s.en} ${vEn} ${pEn}${obj.en}.`;
         }
+
         elements.enOut.textContent = res;
     }
 }
