@@ -211,3 +211,26 @@ select:focus{
   color: var(--muted);
   font-size: 13px;
 }
+/* Nominal/Verbal Switching Animation */
+.hidden-field {
+  display: none !important;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.shown-field {
+  display: block;
+  animation: fadeSlide 0.35s ease both;
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
