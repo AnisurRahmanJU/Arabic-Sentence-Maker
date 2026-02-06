@@ -1,6 +1,6 @@
 /* =====================================
    Arabic Sentence Builder – script.js
-   Developer: Md. Anisur Rahman
+   Full Conjugation & Comprehensive Objects
 ===================================== */
 
 const elements = {
@@ -20,132 +20,112 @@ const elements = {
 };
 
 const subjects = {
-    ana_m: { en: "I", ar: "أَنَا", person: "1s", gender: "m", number: "s" },
-    ana_f: { en: "I", ar: "أَنَا", person: "1s", gender: "f", number: "s" },
-    anta:  { en: "You", ar: "أَنْتَ", person: "2sm", gender: "m", number: "s" },
-    anti:  { en: "You", ar: "أَنْتِ", person: "2sf", gender: "f", number: "s" },
-    huwa:  { en: "He", ar: "هُوَ", person: "3sm", gender: "m", number: "s" },
-    hiya:  { en: "She", ar: "هِيَ", person: "3sf", gender: "f", number: "s" },
-    nahnu: { en: "We", ar: "نَحْنُ", person: "1p", gender: "x", number: "p" },
-    antum: { en: "You", ar: "أَنْتُمْ", person: "2p", gender: "m", number: "p" },
-    antunna: { en: "You", ar: "أَنْتُنَّ", person: "2pf", gender: "f", number: "p" },
-    hum:   { en: "They", ar: "هُمْ", person: "3p", gender: "m", number: "p" },
-    hunna: { en: "They", ar: "هُنَّ", person: "3pf", gender: "f", number: "p" }
-};
-
-const predicates = {
-    muslim_m: { en: "a Muslim", ar: { "1s": "مُسْلِمٌ", "2sm": "مُسْلِمٌ", "3sm": "مُسْلِمٌ", "1p": "مُسْلِمُونَ", "2p": "مُسْلِمُونَ", "3p": "مُسْلِمُونَ" } },
-    muslim_f: { en: "a Muslim", ar: { "1s": "مُسْلِمَةٌ", "2sf": "مُسْلِمَةٌ", "3sf": "مُسْلِمَةٌ", "1p": "مُسْلِمَاتٌ", "2pf": "مُسْلِمَاتٌ", "3pf": "مُسْلِمَاتٌ" } },
-    talib_m: { en: "a student", ar: { "1s": "طَالِبٌ", "3sm": "طَالِبٌ", "1p": "طُلَّابٌ", "3p": "طُلَّابٌ" } },
-    taliba_f: { en: "a student", ar: { "1s": "طَالِبَةٌ", "3sf": "طَالِبَةٌ", "1p": "طَالِبَاتٌ", "3pf": "طَالِبَاتٌ" } }
-};
-
-const objects = {
-    kitab: { en: "the book", ar: "الْكِتَابَ", type: "thing" },
-    tufaha: { en: "the apple", ar: "التُّفَّاحَةَ", type: "thing" },
-    maa: { en: "water", ar: "الْمَاءَ", type: "thing" },
-    qalam: { en: "the pen", ar: "الْقَلَمَ", type: "thing" },
-    madrasa: { en: "the school", ar: "الْمَدْرَسَةِ", type: "place" },
-    masjid: { en: "the mosque", ar: "الْمَسْجِدِ", type: "place" },
-    bayt: { en: "the house", ar: "الْبَيْتِ", type: "place" },
-    kursi: { en: "the chair", ar: "الْكُرْسِيِّ", type: "place" },
-    suq: { en: "the market", ar: "السُّوقِ", type: "place" },
-    obj_me: { en: "me", ar: { suffix: "نِي" }, type: "pronoun" },
-    obj_us: { en: "us", ar: { suffix: "نَا" }, type: "pronoun" },
-    obj_you_m: { en: "you (m)", ar: { suffix: "كَ" }, type: "pronoun" },
-    obj_you_f: { en: "you (f)", ar: { suffix: "كِ" }, type: "pronoun" },
-    obj_you_pm: { en: "you (pl.m)", ar: { suffix: "كُمْ" }, type: "pronoun" },
-    obj_you_pf: { en: "you (pl.f)", ar: { suffix: "كُنَّ" }, type: "pronoun" },
-    obj_him: { en: "him", ar: { suffix: "هُ" }, type: "pronoun" },
-    obj_her: { en: "her", ar: { suffix: "هَا" }, type: "pronoun" },
-    obj_them_m: { en: "them (m)", ar: { suffix: "هُمْ" }, type: "pronoun" },
-    obj_them_f: { en: "them (f)", ar: { suffix: "هُنَّ" }, type: "pronoun" }
-};
-
-const preps = {
-    ila: { en: "to", ar: "إِلَى" },
-    fi: { en: "in", ar: "فِي" },
-    ala: { en: "on", ar: "عَلَى" },
-    min: { en: "from", ar: "مِنْ" }
+    huwa:     { en: "He", ar: "هُوَ", p: "3sm", n: "s" },
+    huma_m:   { en: "They (2m)", ar: "هُمَا", p: "3dm", n: "d" },
+    hum:      { en: "They (m)", ar: "هُمْ", p: "3pm", n: "p" },
+    hiya:     { en: "She", ar: "هِيَ", p: "3sf", n: "s" },
+    huma_f:   { en: "They (2f)", ar: "هُمَا", p: "3df", n: "d" },
+    hunna:    { en: "They (f)", ar: "هُنَّ", p: "3pf", n: "p" },
+    anta:     { en: "You (m)", ar: "أَنْتَ", p: "2sm", n: "s" },
+    antuma_m: { en: "You (2m)", ar: "أَنْتُمَا", p: "2dm", n: "d" },
+    antum:    { en: "You (m-pl)", ar: "أَنْتُمْ", p: "2pm", n: "p" },
+    anti:     { en: "You (f)", ar: "أَنْتِ", p: "2sf", n: "s" },
+    antuma_f: { en: "You (2f)", ar: "أَنْتُمَا", p: "2df", n: "d" },
+    antunna:  { en: "You (f-pl)", ar: "أَنْتُنَّ", p: "2pf", n: "p" },
+    ana:      { en: "I", ar: "أَنَا", p: "1s", n: "s" },
+    nahnu:    { en: "We", ar: "نَحْنُ", p: "1p", n: "p" }
 };
 
 const verbs = {
-    dhahaba: { en: "go", pastEn: "went", defPrep: "ila", ar: {
-        past: { "1s":"ذَهَبْتُ", "2sm":"ذَهَبْتَ", "3sm":"ذَهَبَ", "3sf":"ذَهَبَتْ", "1p":"ذَهَبْنَا", "2p":"ذَهَبْتُمْ", "3p":"ذَهَبُوا" },
-        present: { "1s":"أَذْهَبُ", "2sm":"تَذْهَبُ", "3sm":"يَذْهَبُ", "3sf":"تَذْهَبُ", "1p":"نَذْهَبُ" },
-        order: { "2sm":"اِذْهَبْ", "2sf":"اِذْهَبِي" }
-    }, type: "place" },
-    akala: { en: "eat", pastEn: "ate", defPrep: "", ar: {
-        past: { "1s":"أَكَلْتُ", "3sm":"أَكَلَ", "3sf":"أَكَلَتْ", "1p":"أَكَلْنَا" },
-        present: { "1s":"آكُلُ", "3sm":"يَأْكُلُ", "3sf":"تَأْكُلُ" },
-        order: { "2sm":"كُلْ", "2sf":"كُلِي" }
-    }, type: "thing" },
-    shariba: { en: "drink", pastEn: "drank", defPrep: "", ar: {
-        past: { "1s":"شَرِبْتُ", "3sm":"شَرِبَ", "1p":"شَرِبْنَا" },
-        present: { "1s":"أَشْرَبُ", "3sm":"يَشْرَبُ" },
+    nasara: { en: "help", pastEn: "helped", ar: {
+        past: { "3sm":"نَصَرَ", "3dm":"نَصَرَا", "3pm":"نَصَرُوا", "3sf":"نَصَرَتْ", "3df":"نَصَرَتَا", "3pf":"نَصَرْنَ", "2sm":"نَصَرْتَ", "2dm":"نَصَرْتُمَا", "2pm":"نَصَرْتُمْ", "2sf":"نَصَرْتِ", "2df":"نَصَرْتُمَا", "2pf":"نَصَرْتُنَّ", "1s":"نَصَرْتُ", "1p":"نَصَرْنَا" },
+        present: { "3sm":"يَنْصُرُ", "3dm":"يَنْصُرَانِ", "3pm":"يَنْصُرُونَ", "3sf":"تَنْصُرُ", "3df":"تَنْصُرَانِ", "3pf":"يَنْصُرْنَ", "2sm":"تَنْصُرُ", "2dm":"تَنْصُرَانِ", "2pm":"تَنْصُرُونَ", "2sf":"تَنْصُرِينَ", "2df":"تَنْصُرَانِ", "2pf":"تَنْصُرْنَ", "1s":"أَنْصُرُ", "1p":"نَنْصُرُ" },
+        order: { "2sm":"اُنْصُرْ", "2sf":"اُنْصُرِي", "2dm":"اُنْصُرَا", "2pm":"اُنْصُرُوا", "2pf":"اُنْصُرْنَ" }
+    }},
+    dhahaba: { en: "go", pastEn: "went", ar: {
+        past: { "3sm":"ذَهَبَ", "3dm":"ذَهَبَا", "3pm":"ذَهَبُوا", "3sf":"ذَهَبَتْ", "3df":"ذَهَبَتَا", "3pf":"ذَهَبْنَ", "2sm":"ذَهَبْتَ", "2dm":"ذَهَبْتُمَا", "2pm":"ذَهَبْتُمْ", "2sf":"ذَهَبْتِ", "2df":"ذَهَبْتُمَا", "2pf":"ذَهَبْتُنَّ", "1s":"ذَهَبْتُ", "1p":"ذَهَبْنَا" },
+        present: { "3sm":"يَذْهَبُ", "3dm":"يَذْهَبَانِ", "3pm":"يَذْهَبُونَ", "3sf":"تَذْهَبُ", "3df":"تَذْهَبَانِ", "3pf":"يَذْهَبْنَ", "2sm":"تَذْهَبُ", "2dm":"تَذْهَبَانِ", "2pm":"تَذْهَبُونَ", "2sf":"تَذْهَبِينَ", "2df":"تَذْهَبَانِ", "2pf":"تَذْهَبْنَ", "1s":"أَذْهَبُ", "1p":"نَذْهَبُ" },
+        order: { "2sm":"اِذْهَبْ", "2sf":"اِذْهَبِي", "2dm":"اِذْهَبَا", "2pm":"اِذْهَبُوا", "2pf":"اِذْهَبْنَ" }
+    }},
+    akala: { en: "eat", pastEn: "ate", ar: {
+        past: { "3sm":"أَكَلَ", "3sf":"أَكَلَتْ", "2sm":"أَكَلْتَ", "1s":"أَكَلْتُ", "1p":"أَكَلْنَا" },
+        present: { "3sm":"يَأْكُلُ", "2sm":"تَأْكُلُ", "1s":"آكُلُ", "1p":"نَأْكُلُ" },
+        order: { "2sm":"كُلْ", "2sf":"كُلِي", "2pm":"كُلُوا" }
+    }},
+    shariba: { en: "drink", pastEn: "drank", ar: {
+        past: { "3sm":"شَرِبَ", "1s":"شَرِبْتُ", "2sm":"شَرِبْتَ" },
+        present: { "3sm":"يَشْرَبُ", "1s":"أَشْرَبُ", "2sm":"تَشْرَبُ" },
         order: { "2sm":"اِشْرَبْ" }
-    }, type: "thing" },
-    kataba: { en: "write", pastEn: "wrote", defPrep: "", ar: {
-        past: { "1s":"كَتَبْتُ", "3sm":"كَتَبَ" },
-        present: { "1s":"أَكْتُبُ", "3sm":"يَكْتُبُ" },
+    }},
+    kataba: { en: "write", pastEn: "wrote", ar: {
+        past: { "3sm":"كَتَبَ", "1s":"كَتَبْتُ", "2sm":"كَتَبْتَ" },
+        present: { "3sm":"يَكْتُبُ", "1s":"أَكْتُبُ", "2sm":"تكْتُبُ" },
         order: { "2sm":"اُكْتُبْ" }
-    }, type: "thing" },
-    qaraa: { en: "read", pastEn: "read", defPrep: "", ar: {
-        past: { "1s":"قَرَأْتُ", "3sm":"قَرَأَ" },
-        present: { "1s":"أَقْرَأُ", "3sm":"يَقْرَأُ" },
-        order: { "2sm":"اِقْرَأْ" }
-    }, type: "thing" },
-    nasara: { en: "help", pastEn: "helped", defPrep: "", ar: {
-        past: { "1s":"نَصَرْتُ", "3sm":"نَصَرَ" },
-        present: { "1s":"أَنْصُرُ", "3sm":"يَنْصُرُ" },
-        order: { "2sm":"اُنْصُرْ" }
-    }, type: "any" },
-    jaa: { en: "come", pastEn: "came", defPrep: "ila", ar: {
-        past: { "1s":"جِئْتُ", "3sm":"جَاءَ" },
-        present: { "1s":"آتِي", "3sm":"يَأْتِي" },
-        order: { "2sm":"تَعَالَ" }
-    }, type: "place" },
-    fataha: { en: "open", pastEn: "opened", defPrep: "", ar: {
-        past: { "1s":"فَتَحْتُ", "3sm":"فَتَحَ" },
-        present: { "1s":"أَفْتَحُ", "3sm":"يَفْتَحُ" },
+    }},
+    fataha: { en: "open", pastEn: "opened", ar: {
+        past: { "3sm":"فَتَحَ", "1s":"فَتَحْتُ", "2sm":"فَتَحْتَ" },
+        present: { "3sm":"يَفْتَحُ", "1s":"أَفْتَحُ", "2sm":"تَفْتَحُ" },
         order: { "2sm":"اِفْتَحْ" }
-    }, type: "thing" },
-    jalasa: { en: "sit", pastEn: "sat", defPrep: "ala", ar: {
-        past: { "1s":"جَلَسْتُ", "3sm":"جَلَسَ" },
-        present: { "1s":"أَجْلِسُ", "3sm":"يَجْلِسُ" },
+    }},
+    jalasa: { en: "sit", pastEn: "sat", ar: {
+        past: { "3sm":"جَلَسَ", "1s":"جَلَسْتُ", "2sm":"جَلَسْتَ" },
+        present: { "3sm":"يَجْلِسُ", "1s":"أَجْلِسُ", "2sm":"تَجْلِسُ" },
         order: { "2sm":"اِجْلِسْ" }
-    }, type: "place" },
-    ghasala: { en: "wash", pastEn: "washed", defPrep: "", ar: {
-        past: { "1s":"غَسَلْتُ", "3sm":"غَسَلَ" },
-        present: { "1s":"أَغْسِلُ", "3sm":"يَغْسِلُ" },
+    }},
+    qaraa: { en: "read", pastEn: "read", ar: {
+        past: { "3sm":"قَرَأَ", "1s":"قَرَأْتُ", "2sm":"قَرَأْتَ" },
+        present: { "3sm":"يَقْرَأُ", "1s":"أَقْرَأُ", "2sm":"تَقْرَأُ" },
+        order: { "2sm":"اِقْرَأْ" }
+    }},
+    ghasala: { en: "wash", pastEn: "washed", ar: {
+        past: { "3sm":"غَسَلَ", "1s":"غَسَلْتُ", "2sm":"غَسَلْتَ" },
+        present: { "3sm":"يَغْسِلُ", "1s":"أَغْسِلُ", "2sm":"تَغْسِلُ" },
         order: { "2sm":"اِغْسِلْ" }
-    }, type: "thing" }
+    }},
+    dakhala: { en: "enter", pastEn: "entered", ar: {
+        past: { "3sm":"دَخَلَ", "1s":"دَخَلْتُ", "2sm":"دَخَلْتَ" },
+        present: { "3sm":"يَدْخُلُ", "1s":"أَدْخُلُ", "2sm":"تَدْخُلُ" },
+        order: { "2sm":"اُدْخُلْ" }
+    }}
 };
 
-function populate() {
-    const fill = (el, data) => {
-        el.innerHTML = "";
-        for (let k in data) {
-            let label = data[k].en + (data[k].ar && typeof data[k].ar === 'string' ? ` (${data[k].ar})` : "");
-            el.add(new Option(label, k));
-        }
-    };
-    fill(elements.subj, subjects);
-    fill(elements.verb, verbs);
-    fill(elements.pred, predicates);
-    
-    elements.prep.innerHTML = '<option value="">-- auto/none --</option>';
-    for (let k in preps) elements.prep.add(new Option(preps[k].en, k));
-    
-    elements.obj.innerHTML = '<option value="">-- select object --</option>';
-    for (let k in objects) elements.obj.add(new Option(objects[k].en, k));
-}
+const prepositions = {
+    none: { en: "", ar: "" },
+    ila:  { en: "to", ar: "إِلَى" },
+    fi:   { en: "in", ar: "فِي" },
+    ala:  { en: "on", ar: "عَلَى" },
+    bi:   { en: "with/by", ar: "بِـ" }
+};
 
-function updateUI() {
-    const isNom = elements.type.value === "nominal";
-    elements.nominalFields.forEach(f => f.style.display = isNom ? "block" : "none");
-    elements.verbalFields.forEach(f => f.style.display = isNom ? "none" : "block");
-}
+const objects = {
+    madrasa: { en: "school", ar: "الْمَدْرَسَةِ", type: "noun" },
+    bayt:    { en: "house", ar: "الْبَيْتِ", type: "noun" },
+    balad:   { en: "country", ar: "الْبَلَدِ", type: "noun" },
+    rice:    { en: "rice", ar: "الأَرُزَّ", type: "noun" },
+    apple:   { en: "apple", ar: "التُّفَّاحَةَ", type: "noun" },
+    water:   { en: "water", ar: "الْمَاءَ", type: "noun" },
+    table:   { en: "table", ar: "الطَّاوِلَةِ", type: "noun" },
+    chair:   { en: "chair", ar: "الْكُرْسِيِّ", type: "noun" },
+    obj_me:       { en: "me", suffix: "نِي", type: "pronoun" },
+    obj_us:       { en: "us", suffix: "نَا", type: "pronoun" },
+    obj_him:      { en: "him", suffix: "هُ", type: "pronoun" },
+    obj_her:      { en: "her", suffix: "هَا", type: "pronoun" },
+    obj_them:     { en: "them", suffix: "هُمْ", type: "pronoun" },
+    obj_you_m:    { en: "you (m)", suffix: "كَ", type: "pronoun" }
+};
+
+const predicates = {
+    muslim: {
+        en: "Muslim",
+        ar: {
+            "3sm":"مُسْلِمٌ", "3dm":"مُسْلِمَانِ", "3pm":"مُسْلِمُونَ",
+            "3sf":"مُسْلِمَةٌ", "3df":"مُسْلِمَتَانِ", "3pf":"مُسْلِمَاتٌ",
+            "2sm":"مُسْلِمٌ", "2dm":"مُسْلِمَانِ", "2pm":"مُسْلِمُونَ",
+            "2sf":"مُسْلِمَةٌ", "2df":"مُسْلِمَتَانِ", "2pf":"مُسْلِمَاتٌ",
+            "1s":"مُسْلِمٌ", "1p":"مُسْلِمُونَ"
+        }
+    }
+};
 
 function build() {
     const s = subjects[elements.subj.value];
@@ -153,81 +133,85 @@ function build() {
 
     if (type === "nominal") {
         const p = predicates[elements.pred.value];
-        const arPred = p.ar[s.person] || p.ar["1s"];
-        elements.arOut.textContent = `${s.ar} ${arPred}`;
+        elements.arOut.textContent = `${s.ar} ${p.ar[s.p]}`;
         
-        // Fixed "You are" for 2nd person
-        let be = (s.person === "1s") ? "am" 
-                  : (["2sm","2sf","2p","2pf"].includes(s.person)) ? "are"
-                  : (s.number === "p") ? "are" 
-                  : "is";
+        let verbBe = "is";
+        if (s.p === "1s") verbBe = "am";
+        else if (s.n !== "s" || s.p.startsWith("2")) verbBe = "are";
 
-        let nounEn = p.en;
-        if (s.number === "p") nounEn = nounEn.replace("a ", "") + "s";
-        elements.enOut.textContent = `${s.en} ${be} ${nounEn}.`;
+        let predEn = (s.n !== "s") ? p.en + "s" : p.en;
+        elements.enOut.textContent = `${s.en} ${verbBe} ${predEn}.`;
     } else {
         const v = verbs[elements.verb.value];
         const obj = objects[elements.obj.value];
+        const prep = prepositions[elements.prep.value];
         const tense = elements.tense.value;
         const mode = elements.mode.value;
-        
-        if (!obj) return;
 
-        let pKey = elements.prep.value;
-        if (!pKey && obj.type === "place") pKey = v.defPrep;
+        if (tense === "order" && !s.p.startsWith("2")) {
+            elements.arOut.textContent = "Requires 'You' subject";
+            return;
+        }
 
-        const vAr = v.ar[tense][s.person] || v.ar[tense]["3sm"] || v.ar[tense]["2sm"];
-        let arParts = [];
-        if (mode === "interrogative") arParts.push("هَلْ");
-        if (tense !== "order") arParts.push(s.ar);
-        if (mode === "negative") arParts.push(tense === "past" ? "مَا" : "لَا");
+        const vAr = v.ar[tense][s.p] || v.ar[tense]["3sm"];
+        let arRes = [];
+        if (mode === "interrogative") arRes.push("هَلْ");
+        if (tense !== "order") arRes.push(s.ar);
+        if (mode === "negative") arRes.push(tense === "past" ? "مَا" : "لَا");
 
-        if (!pKey) {
-            if (obj.type === "pronoun") arParts.push(vAr + obj.ar.suffix);
-            else arParts.push(vAr, obj.ar);
+        if (obj.type === "pronoun") {
+            arRes.push(vAr + obj.suffix);
         } else {
-            arParts.push(vAr, preps[pKey].ar, (obj.type === "pronoun" ? obj.ar.suffix : obj.ar));
+            if (prep.ar !== "") arRes.push(vAr, prep.ar, obj.ar);
+            else arRes.push(vAr, obj.ar);
         }
-        const arSentence = arParts.join(" ");
-        elements.arOut.textContent = arSentence;
+        elements.arOut.textContent = arRes.join(" ");
 
-        // English output
-        let vEn = (tense === "past") ? v.pastEn : v.en;
-        if (tense === "present" && ["3sm", "3sf"].includes(s.person) && mode === "affirmative") {
-            vEn += (vEn.endsWith("o") ? "es" : "s");
+        let enRes = "";
+        const isSing3rd = (s.p === "3sm" || s.p === "3sf");
+        const doDoes = isSing3rd ? "does" : "do";
+        const prepEn = prep.en !== "" ? prep.en + " " : "";
+
+        if (tense === "past") {
+            if (mode === "negative") enRes = `${s.en} did not ${v.en} ${prepEn}${obj.en}.`;
+            else if (mode === "interrogative") enRes = `Did ${s.en} ${v.en} ${prepEn}${obj.en}?`;
+            else enRes = `${s.en} ${v.pastEn} ${prepEn}${obj.en}.`;
+        } 
+        else if (tense === "present") {
+            if (mode === "negative") enRes = `${s.en} ${doDoes} not ${v.en} ${prepEn}${obj.en}.`;
+            else if (mode === "interrogative") enRes = `${doDoes.charAt(0).toUpperCase() + doDoes.slice(1)} ${s.en} ${v.en} ${prepEn}${obj.en}?`;
+            else {
+                // FIXED: Changed "gos" logic to "goes" for 3rd person singular
+                let verbS = isSing3rd ? (v.en === "go" ? "goes" : v.en + "s") : v.en;
+                enRes = `${s.en} ${verbS} ${prepEn}${obj.en}.`;
+            }
+        } 
+        else if (tense === "order") {
+            if (mode === "negative") enRes = `Do not ${v.en} ${prepEn}${obj.en}!`;
+            else if (mode === "interrogative") enRes = `Do you ${v.en} ${prepEn}${obj.en}?`;
+            else enRes = `${v.en.toUpperCase()} ${prepEn}${obj.en}!`;
         }
-
-        let pEn = pKey ? preps[pKey].en + " " : "";
-        let res = "";
-
-        // Fix: Order + Negative -> Do not ...
-        if (tense === "order" && (arSentence.includes("لَا") || arSentence.includes("مَا"))) {
-            res = `Do not ${v.en} ${pEn}${obj.en}!`;
-        } else if (tense === "order" && mode === "interrogative") {
-            res = `Do you ${v.en} ${pEn}${obj.en}?`;
-        } else if (tense === "order") {
-            res = `${v.en.toUpperCase()} ${pEn}${obj.en}!`;
-        } else if (mode === "interrogative") {
-            let aux = (tense === "past") ? "Did" : (["3sm", "3sf"].includes(s.person) ? "Does" : "Do");
-            res = `${aux} ${s.en.toLowerCase()} ${v.en} ${pEn}${obj.en}?`;
-        } else if (mode === "negative") {
-            let aux = (tense === "past") ? "did not" : (["3sm", "3sf"].includes(s.person) ? "does not" : "do not");
-            res = `${s.en} ${aux} ${v.en} ${pEn}${obj.en}.`;
-        } else {
-            res = `${s.en} ${vEn} ${pEn}${obj.en}.`;
-        }
-
-        elements.enOut.textContent = res;
+        elements.enOut.textContent = enRes;
     }
 }
 
 function init() {
-    populate();
-    updateUI();
-    elements.type.onchange = () => { updateUI(); build(); };
-    [elements.subj, elements.pred, elements.verb, elements.prep, elements.obj, elements.tense, elements.mode]
-    .forEach(el => el.onchange = build);
+    const fill = (el, data) => { el.innerHTML = ""; for (let k in data) el.add(new Option(data[k].en, k)); };
+    fill(elements.subj, subjects);
+    fill(elements.verb, verbs);
+    fill(elements.pred, predicates);
+    fill(elements.obj, objects);
+    fill(elements.prep, prepositions);
+    
+    [elements.subj, elements.pred, elements.verb, elements.obj, elements.prep, elements.tense, elements.mode].forEach(el => el.onchange = build);
+    
+    elements.type.onchange = () => {
+        const isNom = elements.type.value === "nominal";
+        elements.nominalFields.forEach(f => f.style.display = isNom ? "block" : "none");
+        elements.verbalFields.forEach(f => f.style.display = isNom ? "none" : "block");
+        build();
+    };
     elements.btn.onclick = build;
+    elements.type.dispatchEvent(new Event('change'));
 }
-
 init();
