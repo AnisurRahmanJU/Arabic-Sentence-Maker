@@ -155,7 +155,7 @@ const objects = {
     water:   { en: "water", ar: "الْمَاءَ", type: "noun" },
     table:   { en: "the table", ar: "الطَّاوِلَةِ", type: "noun" },
     chair:   { en: "the chair", ar: "الْكُرْسِيِّ", type: "noun" },
-    book:    { en: "book", ar: "الْكِتَابَ", type: "noun" }, 
+    book:    { en: "the book", ar: "الْكِتَابَ", type: "noun" }, 
     obj_me:       { en: "me", suffix: "نِي", type: "pronoun" },
     obj_us:       { en: "us", suffix: "نَا", type: "pronoun" },
     obj_it:       { en: "it", suffix: "هُ", type: "pronoun" },
