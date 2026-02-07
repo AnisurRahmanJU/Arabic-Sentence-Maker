@@ -165,7 +165,6 @@ const objects = {
     obj_you_m:    { en: "you (m)", suffix: "كَ", type: "pronoun" }
 };
 
-
 const predicates = {
     muslim: {
         en: "Muslim",
@@ -178,7 +177,6 @@ const predicates = {
         }
     }
 };
-
 
 function build() {
     const s = subjects[elements.subj.value];
@@ -247,7 +245,6 @@ function build() {
         elements.enOut.textContent = enRes;
     }
 }
-
 
 function init() {
     const fill = (el, data) => { el.innerHTML = ""; for (let k in data) el.add(new Option(data[k].en, k)); };
